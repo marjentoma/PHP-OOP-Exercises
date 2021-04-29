@@ -22,19 +22,41 @@
         </div>
         <div class="content">
             <h1>Email Validation</h1>
-            <form action="">
+            <form action="" method="POST">
             <div class="form-group">
                 <label for="">Email Address</label>
                 <br>
-                <input type="email" class="form-control" name="email" id="email"  placeholder="EmailAddress">
+                <input type="text" class="form-control" name="email" id="email"  placeholder="EmailAddress">
 
             </div>
 
             <br>
-            <button type="submit" class="btn"name="post" >Submit</a></button>
+            <button type="submit" class="btn"name="post" >Submit</a></button><br><br>
+                <h4 style="color: blue">
+                        <?php
+            class EmailCheck{
+                public $email;
+                public $regex= "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";
+
+                public function validate(){
+                    if(isset($_POST['post'])){
+                    $email=$_POST['email'];
+                    if(preg_match( "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i",$email)){
+                        echo "Valid Email Address";
+                    }else{
+                        echo "<h4 style='color:red'>Invalid email address</h4>";
+                    }
+                }
+                }
+            }
+            $emailcheck= new EmailCheck();
+            $emailcheck->validate();
+        ?>
+                    </h4>
             </form>
         </div>
     </div>
+        
 </body>
 
 </html>

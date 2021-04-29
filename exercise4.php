@@ -18,15 +18,16 @@
         <div class="row py-5 mt-4 align-items-center">
             <!-- For Demo Purpose -->
             <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
-                <img src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg" alt=""
+                 <h1>Account Verification</h1>
+                <img src="background.jpg" alt=""
                     class="img-fluid mb-3 d-none d-md-block">
-                <h1>Create an Account</h1>
+               
                 
             </div>
 
             <!-- Registeration Form -->
             <div class="col-md-7 col-lg-6 ml-auto">
-                <form action="http://192.168.0.27:8081/Sd204-Elsa/create_save.php" name="post" method="POST">
+                <form action="" name="post" method="POST">
                     <div class="row">
 
                         <!-- Name -->
@@ -82,24 +83,43 @@
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
-    <?php
+            <div class="card" style="margin:50px;">
+                <div class="card-header text-center"><h4>User's Data</h4></div>
+                <div class="card-body">
+                    <h4>
+             <?php
         class FormVerification{
-            public $name;
-            public $address;
-            public $age;
-            public $contact;
+                public $name;
+                public $address;
+                public $age;
+                public $contact;
 
-            public function checking($name,$address,$age,$contact){
-                if(isset($_POST['post'])){
-                    $name=$_POST['name'];
-                    $address=$_POST['address'];
+                public function checking(){
+                    if(isset($_POST['post'])){
+                        $name=$_POST['name'];
+                        $address=$_POST['address'];
+                        $age=$_POST['age'];
+                        $contact=$_POST['contact'];
+                        if(!empty($name) && (!empty($address)) && (!empty($age)) && (!empty($contact))){
+                            echo "Username: ".$name;
+                            echo "<br>Address: ".$address;
+                            echo "<br>Age: ".$age;
+                            echo "<br>Contact Number: ".$contact;
+                        } 
+                    }
                 }
-            }
-        }        
+            } 
+            $form=new FormVerification();
+            $form->checking();       
 
-?>
+            ?>
+</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  
 </body>
 
 </html>
