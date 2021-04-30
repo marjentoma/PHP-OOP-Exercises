@@ -30,32 +30,44 @@
                     <div class="form-group" >
                         <input type="submit" name="submit" value="Add" style="float:left;margin-top:30px;padding: 8px 30px"
                             class="btn btn-outline-danger float-right login_btn">
-                                <select class="form-select form-select w-50" style="float:right;margin-top:30px;">
-                                <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                                </select>
+                             <br><br>
+                                <?php
+                                    session_start();
+                                    class userInput
+                                    {
+                                        public $userInput;
+
+                                        public function __construct($userInput)
+                                        {
+                                            $this->userInput = $userInput;
+                                        }
+
+                                        public function addInput()
+                                        {
+                                            if (!isset($_SESSION['option'])) {
+                                                $_SESSION['option'] = [];
+                                            }
+                                            array_push($_SESSION['option'], $this->userInput);
+                                            echo '<center><select name="dropdown" class="form-select form-select w-50"></center>';
+                                            foreach ($_SESSION['option'] as $value) {
+                                                echo '<option value="' . $value . '">"' . $value . '"</option>';
+                                            }
+                                            echo '</select>';
+                                        }
+                                    }
+
+                                    if (isset($_POST['submit'])) {
+                                        $userInput = $_POST['input'];
+                                        $input = new userInput($userInput);
+                                        $input->addInput();
+                                    }   
+                                    ?>
+
                     </div>
                 </form>
             </div>
         </div>
     </div>
-<?php
-    class UserInput{
-        public $input;
-        public function AddOption($input){
-                if(isset($_POST['post'])){
-                $input=$_POST['input'];
-                echo $input;
 
-                }
-        }
-    }
-$result=new UserInput();
-$result->AddOption();
-
-?>
 </body>
-
 </html>
